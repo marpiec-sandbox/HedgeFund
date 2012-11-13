@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
-import os
+from util import WebUtil
 from string import Template
-import urllib2
 
 from Configuration import Configuration
 
@@ -41,13 +40,5 @@ class HistoricalDataDownloader:
     def downloadHistoricalPrizes(self, stockName):
         url = self._urlTemplate.substitute(stockName = stockName)
         fileName = self._fileNameTemplate.substitute(stockName = stockName)
-        self.downloadFileFromUrlAndWriteIt(url, fileName)
+        WebUtil.downloadFromUrlAndSaveToFile(url, fileName, False)
 
-    def downloadFileFromUrlAndWriteIt(self, url, fileName):
-        if not os.path.isfile(fileName):
-            try:
-                u = urllib2.urlopen(url)
-                with open(fileName, "w") as file:
-                    file.write(u.read())
-                file.closed
-            except urllib2.HTTPError: logging.warning("Cannot load from: "+url)
