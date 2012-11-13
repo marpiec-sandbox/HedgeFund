@@ -6,9 +6,8 @@ from historical.StockListDownloader import StockListDownloader
 
 logging.basicConfig(level=logging.INFO)
 
+StockListDownloader("nasdaq").downloadAndConvertStockList()
+StockListDownloader("nyse").downloadAndConvertStockList()
 
-stockListDownloader = StockListDownloader()
-stockListDownloader.downloadStockList()
-
-downloader = HistoricalDataDownloader("nyse")
-downloader.downloadStocks()
+# downloader = HistoricalDataDownloader("nyse")
+# downloader.downloadStocks()
