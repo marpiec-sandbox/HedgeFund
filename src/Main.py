@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from YahooDataDownloader import *
 import logging
 from historical.StockListDownloader import StockListDownloader
+from historical.yahoo.YahooAllDataDownloader import YahooAllDataDownloader
 
 logging.basicConfig(level=logging.INFO)
 
-StockListDownloader("nasdaq").downloadAndConvertStockList()
-StockListDownloader("nyse").downloadAndConvertStockList()
-
-# downloader = HistoricalDataDownloader("nyse")
+#StockListDownloader("nasdaq").downloadAndConvertStockList()
+#StockListDownloader("nyse").downloadAndConvertStockList()
+#
+YahooAllDataDownloader("nyse").downloadStocks()
 # downloader.downloadStocks()

@@ -9,7 +9,7 @@ class StockListDownloader:
 
     _urlTemplate = Template("http://www.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange=${exchangeName}&render=download")
     _rawDataFileNameTemplate = Template(Configuration.HISTORICAL_DATA_DIR + "raw-data/${exchangeName}-rawlist.csv")
-    _finalFileNameTemplate = Template(Configuration.HISTORICAL_DATA_DIR + "${exchangeName}-rawlist.csv")
+    _finalFileNameTemplate = Template(Configuration.HISTORICAL_DATA_DIR + "${exchangeName}-list.csv")
 
     def __init__(self, exchangeName):
         self._exchangeName = exchangeName
