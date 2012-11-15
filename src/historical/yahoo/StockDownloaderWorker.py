@@ -1,6 +1,6 @@
 from historical.yahoo.YahooOneStockDownloader import YahooOneStockDownloader
 
-class StockDownloaderWorker():
+class StockDownloaderWorker:
 
     def __init__(self, exchangeName):
         self._exchangeName = exchangeName

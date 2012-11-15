@@ -35,6 +35,6 @@ class YahooAllDataDownloader:
 #        for stockName in stockNameList:
 #            YahooOneStockDownloader(self._exchangeName, stockName).downloadHistoricalPrizes()
 
-        threadPool = ThreadPoolManager(24)
+        threadPool = ThreadPoolManager(Configuration.DEFAULT_WORKER_THREADS_COUNT)
         threadPool.addTasks(stockNameList)
         threadPool.startWork(StockDownloaderWorker(self._exchangeName))

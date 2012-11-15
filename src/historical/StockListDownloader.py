@@ -3,7 +3,7 @@ import logging
 import re
 from string import Template
 from Configuration import Configuration
-from util import WebUtil
+from util import WebUtil, StringUtil
 
 class StockListDownloader:
 
@@ -43,7 +43,9 @@ class StockListDownloader:
     def _convertLineToProperFormat(self, rawDataLine, finalFile):
         try:
             foundGroups = re.search('"([A-Za-z\s\^/]+)"', rawDataLine)
-            finalFile.write(foundGroups.group(0)[1:-1].strip() + "\n")
+            stockName = foundGroups.group(0)[1:-1].strip()
+            if StringUtil.stringIsOnlyChars(stockName):
+                finalFile.write(stockName + "\n")
         except AttributeError: logging.warn("Couldn't find a stock name in line: "+rawDataLine)
 
 
