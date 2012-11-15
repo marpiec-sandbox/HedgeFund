@@ -1,10 +1,10 @@
-from threading import Thread
+from historical.yahoo.YahooOneStockDownloader import YahooOneStockDownloader
 
-class StockDownloaderWorker(Thread):
+class StockDownloaderWorker():
 
-    def __init__(self):
-        pass
+    def __init__(self, exchangeName):
+        self._exchangeName = exchangeName
 
-    def run(self):
-        super(StockDownloaderWorker, self).run()
+    def work(self, stockName):
+        YahooOneStockDownloader(self._exchangeName, stockName).downloadHistoricalPrizes()
 
