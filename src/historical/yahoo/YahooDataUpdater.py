@@ -11,9 +11,9 @@ class YahooDataUpdater:
     def __init__(self, exchangeName):
         self._exchangeName = exchangeName
 
-    def updateStocks(self):
+    def updateStocks(self, startDate, endDate):
         stockNameList = self._readStockList()
-        self._updateStockData(stockNameList)
+        self._updateStockData(stockNameList, startDate, endDate)
 
     def _readStockList(self):
         stockFiles = os.listdir(Configuration.HISTORICAL_DATA_DIR + self._exchangeName)
@@ -27,7 +27,7 @@ class YahooDataUpdater:
     def _extractStockName(self, stockFile):
         return stockFile[:-4]
 
-    def _updateStockData(self, stockNameList):
+    def _updateStockData(self, stockNameList, startDate, endDate):
         threadPool = ThreadPoolManager(Configuration.DEFAULT_WORKER_THREADS_COUNT)
         threadPool.addTasks(stockNameList)
-        threadPool.startWork(StockUpdaterWorker(self._exchangeName, 2012, 1, 1, 2012, 3, 31))
+        threadPool.startWork(StockUpdaterWorker(self._exchangeName, startDate, endDate))
