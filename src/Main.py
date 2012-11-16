@@ -41,6 +41,13 @@ bestStockA = ""
 bestStockB = ""
 bestSharpe = 0.0
 
+filteredStocks = []
+for stock in stocksLoaded[:]:
+    if stock[0] * 1.2 < stock[-1]:
+        filteredStocks.append(stock)
+
+stocksLoaded = filteredStocks
+
 for a in range(len(stocksLoaded)):
     if a % 30 == 0:
         print "Calculating Sharpe...." + str(int(float(a)/float(len(stocksLoaded))*100.0)) + "% done"
