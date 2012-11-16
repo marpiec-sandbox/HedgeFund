@@ -14,10 +14,10 @@ class YahooDataDownloader:
     def __init__(self, exchangeName):
         self._exchangeName = exchangeName
 
-    def downloadStocks(self, startDate, endDate):
+    def downloadStocks(self, fromDate, toDate):
         stockNameList = self._readStockList()
         logging.info("Loaded " + str(len(stockNameList)) + " stocks from file.")
-        self._downloadHistoricalPrizesForStocks(stockNameList, startDate, endDate)
+        self._downloadHistoricalPrizesForStocks(stockNameList, fromDate, toDate)
 
     def _readStockList(self):
         with open(Configuration.HISTORICAL_DATA_DIR + self._exchangeName + "-list.csv", 'r') as stockListFile:
@@ -30,11 +30,11 @@ class YahooDataDownloader:
 
         return stockNameList
 
-    def _downloadHistoricalPrizesForStocks(self, stockNameList, startDate, endDate):
+    def _downloadHistoricalPrizesForStocks(self, stockNameList, fromDate, toDate):
 
 #        for stockName in stockNameList:
 #            YahooOneStockDownloader(self._exchangeName, stockName).downloadHistoricalPrizes()
 
         threadPool = ThreadPoolManager(Configuration.DEFAULT_WORKER_THREADS_COUNT)
         threadPool.addTasks(stockNameList)
-        threadPool.startWork(StockDownloaderWorker(self._exchangeName, startDate, endDate))
+        threadPool.startWork(StockDownloaderWorker(self._exchangeName, fromDate, toDate))

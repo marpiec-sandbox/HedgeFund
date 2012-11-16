@@ -10,10 +10,10 @@ class YahooUrlBuilder:
                             "&d=${endZeroBasedMonth}&e=${endDay}&f=${endYear}" +
                             "&g=d&ignore=.csv")
 
-    def __init__(self, stockName, startDate, endDate):
+    def __init__(self, stockName, fromDate, toDate):
         self._url = self._urlTemplate.substitute(stockName = stockName,
-            startZeroBasedMonth = startDate.month - 1, startDay = startDate.day, startYear = startDate.year,
-            endZeroBasedMonth = endDate.month - 1, endDay = endDate.day, endYear = endDate.year)
+            startZeroBasedMonth = fromDate.month - 1, startDay = fromDate.day, startYear = fromDate.year,
+            endZeroBasedMonth = toDate.month - 1, endDay = toDate.day, endYear = toDate.year)
 
     def build(self):
         return self._url

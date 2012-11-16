@@ -9,19 +9,19 @@ from util import WebUtil
 class YahooOneStockUpdater:
     MAXIMUM_FILE_LINE_LENGTH = 100
 
-    def __init__(self, exchangeName, stockName, endDate):
+    def __init__(self, exchangeName, stockName, toDate):
         self._stockName = stockName
-        self._endDate = endDate
-        self._fileName = YahooFileNameBuilder(exchangeName, stockName).build()
+        self._toDate = toDate
+        self._fileName = YahooFileNameBuilder(exchangeName).build(stockName)
 
 
     def updateHistoricalPrizes(self):
-        startDate = self._getStartDateForStock()
-        if startDate < self._endDate:
-            self._url = YahooUrlBuilder(self._stockName, startDate, self._endDate).build()
+        fromDate = self._getFromDateForStock()
+        if fromDate < self._toDate:
+            self._url = YahooUrlBuilder(self._stockName, fromDate, self._toDate).build()
             WebUtil.downloadFromUrlAndAppendToFile(self._url, self._fileName)
 
-    def _getStartDateForStock(self):
+    def _getFromDateForStock(self):
         lastLine = self._getLastLineInFile()
         lastDate = self._parseLineToFindTheDate(lastLine)
         theDayAfter = self._calculateTheDayAfter(lastDate)
