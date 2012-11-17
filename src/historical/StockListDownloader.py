@@ -42,7 +42,7 @@ class StockListDownloader:
 
     def _convertLineToProperFormat(self, rawDataLine, finalFile):
         try:
-            foundGroups = re.search('"([A-Za-z\s\^/]+)"', rawDataLine)
+            foundGroups = re.search('"([A-Za-z\.\s\^/]+)"', rawDataLine)
             stockName = foundGroups.group(0)[1:-1].strip()
             if StringUtil.stringIsOnlyChars(stockName):
                 finalFile.write(stockName + "\n")
