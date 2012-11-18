@@ -3,10 +3,11 @@ from util import StringUtil
 
 class RemainingTimePrinter:
 
-    def __init__(self, allTasksCount):
+    def __init__(self, message, allTasksCount):
         self._start = time.clock()
         self._allTasksCount = allTasksCount
         self._lastTimePrinted = time.clock() - 2
+        self._message = message
 
     def printMessage(self, tasksDone):
         percentDone = float(tasksDone)/float(self._allTasksCount)*100.0
@@ -20,7 +21,7 @@ class RemainingTimePrinter:
             else:
                 timeRemaining = -1
             self._lastTimePrinted = now
-            print "Working.... " + ("%.1f" % percentDone) + "% done, time ramaining",
+            print self._message + ".... " + ("%.1f" % percentDone) + "% done, time ramaining",
             if timeRemaining < 0:
                 print "unknown"
             else:
